@@ -80,4 +80,3 @@ if __name__ == "__main__":
 	print("\nLinked List after removing duplicates.")
 	llist.printlist()
 
-# This code is contributed by rajataro0
