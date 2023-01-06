@@ -3,6 +3,14 @@ class Node:
         self.data = data
         self.next = None
 
+def printll(self):
+        li = []
+        temp = self
+        while temp:
+            li.append(temp.data)
+            temp = temp.next
+        return li
+
 class LinkList:
     def __init__(self) -> None:
         self.head = None
@@ -32,6 +40,63 @@ class LinkList:
         
         if self.tail.next is not None:
             self.tail.next = None
+    
+    def partition2(self,x):
+        curnode = self.head
+        smallerhead = None
+        smallertail = None
+        equalhead = None
+        equaltail = None
+        greaterhead = None
+        greatertail = None
+        while curnode:
+            nextnode = curnode.next
+            curnode.next = None
+            if curnode.data<x:
+                if not smallerhead:
+                    smallerhead = curnode
+                    smallertail = curnode
+                else:
+                    smallertail.next = curnode
+                    smallertail = curnode
+            
+            elif curnode.data==x:
+                if not equalhead:
+                    equalhead = curnode
+                    equaltail = curnode
+                else:
+                    equaltail.next = curnode
+                    equaltail = curnode
+            
+            elif curnode.data>x:
+                if not greaterhead:
+                    greaterhead = curnode
+                    greatertail = curnode
+                else:
+                    greatertail.next = curnode
+                    greatertail = curnode
+            curnode = nextnode
+        
+        if not smallerhead:
+            if not equalhead:
+                return greaterhead
+            equaltail.next = greaterhead
+            return equalhead
+        if not equalhead:
+            smallertail.next = greaterhead
+            return smallerhead
+        smallertail.next = equalhead
+        equaltail.next = greaterhead
+        return smallerhead
+
+
+
+        
+
+            
+
+
+
 
     
     
@@ -41,8 +106,8 @@ class LinkList:
 ll = LinkList()
 first = Node(1)
 second = Node(2)
-third = Node(3)
-four = Node(14)
+third = Node(2)
+four = Node(1)
 five = Node(11)
 six = Node(5)
 seven = Node(15)
@@ -59,9 +124,9 @@ ll.tail =  seven
 
 print(ll.print())
 
-ll.partition(6)
+ll = ll.partition2(2)
 
-print(ll.print())
+print(printll(ll))
 
 
 
